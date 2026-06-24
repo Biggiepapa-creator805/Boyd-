@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boyd Movies</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Boyd Movies</div>
+            <input type="text" id="search" placeholder="Search movies...">
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Discover Your Next Favorite Movie</h1>
+        <button onclick="showRandomMovie()">Surprise Me</button>
+    </section>
+
+    <main>
+        <section>
+            <h2>Popular Movies</h2>
+            <div class="movies-grid" id="popular-grid"></div>
+        </section>
+
+        <section>
+            <h2>Trending Now</h2>
+            <div class="movies-grid" id="trending-grid"></div>
+        </section>
+    </main>
+
+    <!-- Movie Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modal-title"></h2>
+            <img id="modal-poster" src="" alt="">
+            <p id="modal-overview"></p>
+            <p><strong>Rating:</strong> <span id="modal-rating"></span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
