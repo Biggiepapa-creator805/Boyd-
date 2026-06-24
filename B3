@@ -1,0 +1,51 @@
+const movies = [
+    { id: 1, title: "Dune: Part Two", poster: "https://picsum.photos/id/1015/300/400", overview: "Paul Atreides unites with Chani...", rating: "8.8" },
+    { id: 2, title: "Oppenheimer", poster: "https://picsum.photos/id/201/300/400", overview: "The story of American scientist...", rating: "8.5" },
+    { id: 3, title: "The Batman", poster: "https://picsum.photos/id/301/300/400", overview: "When a sadistic killer...", rating: "8.1" },
+    { id: 4, title: "Everything Everywhere All at Once", poster: "https://picsum.photos/id/401/300/400", overview: "An aging Chinese immigrant...", rating: "7.8" },
+    { id: 5, title: "Top Gun: Maverick", poster: "https://picsum.photos/id/501/300/400", overview: "After more than thirty years...", rating: "8.2" },
+];
+
+function renderMovies(containerId, movieList) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = '';
+    movieList.forEach(movie => {
+        const card = document.createElement('div');
+        card.className = 'movie-card';
+        card.innerHTML = `
+            <img src="\( {movie.poster}" alt=" \){movie.title}">
+            <h3>${movie.title}</h3>
+        `;
+        card.onclick = () => showMovieDetails(movie);
+        container.appendChild(card);
+    });
+}
+
+function showMovieDetails(movie) {
+    document.getElementById('modal-title').textContent = movie.title;
+    document.getElementById('modal-poster').src = movie.poster;
+    document.getElementById('modal-overview').textContent = movie.overview;
+    document.getElementById('modal-rating').textContent = movie.rating + "/10";
+    document.getElementById('modal').style.display = 'flex';
+}
+
+function closeModal() {
+    document.getElementById('modal').style.display = 'none';
+}
+
+function showRandomMovie() {
+    const random = movies[Math.floor(Math.random() * movies.length)];
+    showMovieDetails(random);
+}
+
+// Search functionality
+document.getElementById('search').addEventListener('input', (e) => {
+    const term = e.target.value.toLowerCase();
+    const filtered = movies.filter(m => m.title.toLowerCase().includes(term));
+    renderMovies('popular-grid', filtered);
+    renderMovies('trending-grid', filtered);
+});
+
+// Initial render
+renderMovies('popular-grid', movies);
+renderMovies('trending-grid', movies.slice().reverse()); 
